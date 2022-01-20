@@ -1,5 +1,8 @@
+<h1>Welcome to Posty</h1>
+<p>Use the form below to login</p>
 <form action="" method="post">
     {{ form.as_p }}
     {% csrf_token %}
     <input type="submit" value="Log In">
 </form>
+<p>Do not have an account <a href="{% url 'posty:register' %}">Sign Up</a></p>
