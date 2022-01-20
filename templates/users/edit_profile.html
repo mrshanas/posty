@@ -1,0 +1,7 @@
+<h1>Edit your Profile</h1>
+<form>
+    {{ form.as_p }}
+    {{ profile.as_p }}
+    {% csrf_token %}
+    <input type="submit" value="Save"/>
+</form>

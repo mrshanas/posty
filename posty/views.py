@@ -1,8 +1,10 @@
-from django.shortcuts import redirect, render
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 
 from posty.models import Profile
-from .forms import ProfileCreateForm
+from .forms import ProfileCreateForm, ProfileEditForm,UserCreateForm, UserEditForm
+from django.contrib.auth.models import User
 
 # Create your views here.
 @login_required
@@ -15,20 +17,51 @@ def register(request):
     """Register users to the database"""
     if request.method != 'POST':
         form = ProfileCreateForm()
+        user = UserCreateForm()
 
     else:
         form = ProfileCreateForm(data=request.POST)
+        user = UserCreateForm(data=request.POST)
 
-        if form.is_valid():
-            cd = form.cleaned_data
-            new_user = form.save(commit=False)
+        if form.is_valid() and user.is_valid():
+            cd = user.cleaned_data
+            new_user = user.save(commit=False)
             new_user.set_password(cd['password'])
             new_user.save()
 
-            Profile.objects.create(user=new_user)
+            # Profile.objects.create(user=new_user)
+            new_profile = form.save(commit=False)
+            new_profile.user = new_user
+            new_profile.save()
             return redirect('posty:home')
 
         else:
             return redirect('posty:register')
             
-    return render(request,'users/register.html',{'form':form})
+    return render(request,'users/register.html',{'form':user,'profile':form})
+
+@login_required
+def edit_profile(request,user_id):
+    """Enable users to edit their profiles"""
+    # user = User.objects.get(id=user_id)
+    # user = get_object_or_404(User,id=user_id)
+    print(request.user)
+
+    if request.method != 'POST':
+        profile_edit_form = ProfileEditForm(instance=request.user)
+        user_edit_form = UserEditForm(instance=request.user)
+        
+
+    else:
+        profile_edit_form = ProfileEditForm(data=request.POST,instance=request.user)
+        user_edit_form = UserEditForm(data=request.POST)
+
+        if profile_edit_form.is_valid() and user_edit_form.is_valid():
+            profile_edit_form.save()
+            user_edit_form.save()
+            return redirect('posty:home')
+
+        else:
+            return redirect('posty:edit_profile',args=request.user.id)
+
+    return render(request,'users/edit_profile.html',{'form':user_edit_form,'profile':profile_edit_form})
