@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 
 from posty.models import Profile
-from .forms import ProfileCreateForm, ProfileEditForm,UserCreateForm, UserEditForm
+from .forms import PostCreateForm, ProfileCreateForm, ProfileEditForm,UserCreateForm, UserEditForm
 from django.contrib.auth.models import User
 
 # Create your views here.
@@ -53,12 +53,12 @@ def edit_profile(request,user_id):
         
 
     else:
-        profile_edit_form = ProfileEditForm(data=request.POST,instance=request.user,files=request.FILES)
+        profile_edit_form = ProfileEditForm(data=request.POST,instance=request.user.user_profile,files=request.FILES)
         user_edit_form = UserEditForm(data=request.POST,instance=request.user)
 
         form_validity = profile_edit_form.is_valid() and user_edit_form.is_valid()
         print(form_validity)
-            
+        print(request.FILES)
 
         if form_validity:
             profile_edit_form.save()
@@ -66,6 +66,24 @@ def edit_profile(request,user_id):
             return redirect('posty:home')
 
         else:
-            return redirect('posty:edit_profile',user_id=request.user.id)
+            return redirect('posty:edit_profile',user_id=user_id)
 
     return render(request,'users/edit_profile.html',{'form':user_edit_form,'profile':profile_edit_form})
+
+@login_required
+def create_post(request):
+    """Post pictures"""
+    if request.method != 'POST':
+        form = PostCreateForm()
+
+    else:
+        form = PostCreateForm(data=request.POST,files=request.FILES)
+
+        if form.is_valid():
+            new_form = form.save(commit=False)
+            new_form.user = request.user
+            new_form.save()
+            return redirect('posty:home')
+            
+    return render(request,'posty/posts/post_create.html',{'form':form})
+
