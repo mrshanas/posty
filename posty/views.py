@@ -20,7 +20,7 @@ def register(request):
         user = UserCreateForm()
 
     else:
-        form = ProfileCreateForm(data=request.POST)
+        form = ProfileCreateForm(data=request.POST,files=request.FILES)
         user = UserCreateForm(data=request.POST)
 
         if form.is_valid() and user.is_valid():
@@ -45,7 +45,7 @@ def edit_profile(request,user_id):
     """Enable users to edit their profiles"""
     # user = User.objects.get(id=user_id)
     # user = get_object_or_404(User,id=user_id)
-    print(request.user)
+    
 
     if request.method != 'POST':
         profile_edit_form = ProfileEditForm(instance=request.user)
@@ -53,15 +53,19 @@ def edit_profile(request,user_id):
         
 
     else:
-        profile_edit_form = ProfileEditForm(data=request.POST,instance=request.user)
-        user_edit_form = UserEditForm(data=request.POST)
+        profile_edit_form = ProfileEditForm(data=request.POST,instance=request.user,files=request.FILES)
+        user_edit_form = UserEditForm(data=request.POST,instance=request.user)
 
-        if profile_edit_form.is_valid() and user_edit_form.is_valid():
+        form_validity = profile_edit_form.is_valid() and user_edit_form.is_valid()
+        print(form_validity)
+            
+
+        if form_validity:
             profile_edit_form.save()
             user_edit_form.save()
             return redirect('posty:home')
 
         else:
-            return redirect('posty:edit_profile',args=request.user.id)
+            return redirect('posty:edit_profile',user_id=request.user.id)
 
     return render(request,'users/edit_profile.html',{'form':user_edit_form,'profile':profile_edit_form})

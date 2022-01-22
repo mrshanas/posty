@@ -1,6 +1,4 @@
-<form method="post">
-    {{ form.as_p }}
-    {{ profile.as_p }}
-    {% csrf_token %}
-    <input type="submit" value="Register"/>
+<form method="post" enctype="multipart/form-data">
+  {{ form.as_p }} {{ profile.as_p }} {% csrf_token %}
+  <input type="submit" value="Register" />
 </form>

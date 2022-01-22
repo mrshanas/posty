@@ -20,9 +20,15 @@ class ProfileCreateForm(forms.ModelForm):
     """A form to create new profile for users"""
     class Meta:
         model = Profile
-        exclude = ['user','date_created']
-        widgets = {
-            'birth_date':forms.DateInput
+        fields = ('birth_date','profile_photo')
+        widget = {
+            'birth_date':forms.DateInput(
+                format=('%Y-%m-%d',),
+                attrs={
+                    'type':'date',
+                    'placeholder':'Birthday'
+                }
+            )
         }
 
 
@@ -30,7 +36,7 @@ class UserEditForm(forms.ModelForm):
     """A form to edit users credentials"""
     class Meta:
         model = User
-        fields = ['username','first_name','last_name','email']
+        fields = ('username','first_name','last_name','email')
 
 
 class ProfileEditForm(forms.ModelForm):
@@ -38,4 +44,13 @@ class ProfileEditForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        exclude = ['date_created','user']
+        fields = ('birth_date','profile_photo')
+        widget = {
+            'birth_date':forms.DateInput(
+                format=('%Y-%m-%d',),
+                attrs={
+                    'type':'date',
+                    'placeholder':'Birthday'
+                }
+            )
+        }
