@@ -20,7 +20,7 @@ class ProfileCreateForm(forms.ModelForm):
     """A form to create new profile for users"""
     class Meta:
         model = Profile
-        fields = ('birth_date','profile_photo')
+        fields = ('date_of_birth','profile_photo')
         widget = {
             'birth_date':forms.DateInput(
                 format=('%Y-%m-%d',),
@@ -44,7 +44,7 @@ class ProfileEditForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = ('birth_date','profile_photo')
+        fields = ('date_of_birth','profile_photo')
         widget = {
             'birth_date':forms.DateInput(
                 format=('%Y-%m-%d',),
