@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django import forms
 
-from posty.models import Profile
+from posty.models import Profile,Post
 
 class UserCreateForm(forms.ModelForm):
     """A form to create new users"""
@@ -20,7 +20,7 @@ class ProfileCreateForm(forms.ModelForm):
     """A form to create new profile for users"""
     class Meta:
         model = Profile
-        fields = ('date_of_birth','profile_photo')
+        fields = ('date_of_birth','profile_photo','bio')
         widget = {
             'birth_date':forms.DateInput(
                 format=('%Y-%m-%d',),
@@ -44,7 +44,7 @@ class ProfileEditForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = ('date_of_birth','profile_photo')
+        fields = ('date_of_birth','profile_photo','bio')
         widget = {
             'birth_date':forms.DateInput(
                 format=('%Y-%m-%d',),
@@ -54,3 +54,12 @@ class ProfileEditForm(forms.ModelForm):
                 }
             )
         }
+
+
+
+class PostCreateForm(forms.ModelForm):
+    """Enable users to create posts"""
+
+    class Meta:
+        model = Post
+        fields = ('post','caption')
