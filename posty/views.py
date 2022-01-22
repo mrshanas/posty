@@ -53,12 +53,12 @@ def edit_profile(request,user_id):
         
 
     else:
-        profile_edit_form = ProfileEditForm(data=request.POST,instance=request.user,files=request.FILES)
+        profile_edit_form = ProfileEditForm(data=request.POST,instance=request.user.user_profile,files=request.FILES)
         user_edit_form = UserEditForm(data=request.POST,instance=request.user)
 
         form_validity = profile_edit_form.is_valid() and user_edit_form.is_valid()
         print(form_validity)
-            
+        print(request.FILES)
 
         if form_validity:
             profile_edit_form.save()
@@ -66,6 +66,6 @@ def edit_profile(request,user_id):
             return redirect('posty:home')
 
         else:
-            return redirect('posty:edit_profile',user_id=request.user.id)
+            return redirect('posty:edit_profile',user_id=user_id)
 
     return render(request,'users/edit_profile.html',{'form':user_edit_form,'profile':profile_edit_form})
