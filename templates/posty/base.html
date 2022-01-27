@@ -1,4 +1,4 @@
 <h1>Hello! Shanas</h1>
 <a href="{% url 'logout' %}">Log Out</a>
-<a href="{% url 'posty:edit_profile' request.user.id %}">Edit Profile</a>
+<a href="{% url 'users:edit_profile' request.user.id %}">Edit Profile</a>
 <a href="{% url 'posty:post' %}">Post</a>
