@@ -15,14 +15,14 @@ from pathlib import Path
 
 env = environ.Env(
     # set casting, default value
-    DEBUG = (bool,False)
+    DEBUG=(bool, False)
 )
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # read .env files
-environ.Env.read_env(os.path.join(BASE_DIR,'.env'))
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
@@ -123,12 +123,16 @@ USE_TZ = True
 # media files uploaded by the user
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR,'media/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
 
 LOGIN_REDIRECT_URL = 'posty:home'
 LOGOUT_REDIRECT_URL = 'login'

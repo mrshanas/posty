@@ -3,7 +3,7 @@ from . import views
 app_name = 'posty'
 
 urlpatterns = [
-    path('',views.home,name='home'),
-    path('register/',views.register,name='register'),
-    path('edit_profile/<int:user_id>/',views.edit_profile,name='edit_profile')
+    path('', views.home, name='home'),
+    path('create_post/', views.create_post, name='post'),
+    path('posts/',views.display_posts,name='posts'),
 ]

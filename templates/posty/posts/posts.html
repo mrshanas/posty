@@ -1,0 +1,8 @@
+{% for p in posts %}
+    <div class="">
+        <img src="{{ p.post.url}}" alt="{{ p.user }} post" height="60%" width="30%">
+        <p>{{ p.caption }}</p>
+        <a href="#">Like</a>
+        <small>{{ p.created_at }}</small>
+    </div>
+{% endfor %}
