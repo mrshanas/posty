@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .forms import ProfileCreateForm, ProfileEditForm, UserCreateForm, UserEditForm
 
+
 # Create your views here.
 
 
@@ -62,3 +63,5 @@ def edit_profile(request, user_id):
             return redirect('posty:edit_profile', user_id=user_id)
 
     return render(request, 'users/edit_profile.html', {'form': user_edit_form, 'profile': profile_edit_form})
+
+# displaying the posts
