@@ -1,4 +1,7 @@
 <form method="post" enctype="multipart/form-data">
-  {{ form.as_p }} {{ profile.as_p }} {% csrf_token %}
+  {{ form.as_p }} 
+  {{ profile.as_p }} 
+  {% csrf_token %}
   <input type="submit" value="Register" />
+  <input type="hidden" name="next" value="{{ next }}">
 </form>

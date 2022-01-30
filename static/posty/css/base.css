@@ -6,3 +6,15 @@ body{
     font-family: 'Comforter', cursive;
     font-size: 1.8rem;
 }
+
+.logo{
+    border-radius: 50%;
+}
+
+.username{
+    text-decoration: none;
+    color: #000;
+}
+.search-box::placeholder{
+    text-align: center;
+}

@@ -1,4 +1,5 @@
 {% load static %}
+{% load thumbnail %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,13 +27,10 @@
 <body>
     {% include 'posty/navbar.html' %}
 
-    <img src="{{ user.user_profile.profile_photo.url }}" alt="">
-    <h1>Hello</h1>
-<!--<a href="{% url 'logout' %}">Log Out</a>
-<a href="{% url 'users:edit_profile' request.user.id %}">Edit Profile</a>
-<a href="{% url 'posty:post' %}">Post</a>
-<br>
-<a href="{% url 'posty:posts' %}">Posts</a> -->
+    
+    
+
+
 
     <!-- JavaScript Bundle with Popper -->
     <script 

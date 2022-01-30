@@ -1,9 +1,37 @@
+{% load thumbnail %}
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         <a href="#" class="navbar-brand app-name ">Posty</a>
         <form action="" class="d-flex">
-            <input type="search" class="form-control" placeholder="Search" aria-label="Search">
+            <input type="search" class="form-control shadow-none search-box" placeholder="Search" aria-label="Search">
         </form>
-        <a href="#">{{ request.user.username }}</a>
+        
+        <div class="d-flex">
+            <!-- DM Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-send mt-2 pe-2" viewBox="0 0 16 16">
+                <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"/>
+              </svg>
+            <a href="#" class="username pe-1 mt-2 d-none d-lg-flex">{{ request.user.username }}</a>
+            {% thumbnail user.user_profile.profile_photo 30x30 quality=100 crop="20,20" as logo%}
+            <div class="dropdown">
+            <button 
+            class="btn dropdown-toggle shadow-none"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            >
+                <img src="{{ logo.url }}" alt="" class="logo">
+            </button>
+            
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a href="{% url 'password_change' %}" class="dropdown-item">Change Password</a></li>
+                    <li><a href="{% url 'users:edit_profile' request.user.id %}" class="dropdown-item">Edit Profile</a></li>
+                    <li><a href="{% url 'logout' %}" class="dropdown-item">Log Out</a></li>
+                </ul>
+            </div>
+            
+        </div>
+       
     </div>
 </nav>
