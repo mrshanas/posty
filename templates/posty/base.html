@@ -25,6 +25,9 @@
 </head>
 <body>
     {% include 'posty/navbar.html' %}
+
+    <img src="{{ user.user_profile.profile_photo.url }}" alt="">
+    <h1>Hello</h1>
 <!--<a href="{% url 'logout' %}">Log Out</a>
 <a href="{% url 'users:edit_profile' request.user.id %}">Edit Profile</a>
 <a href="{% url 'posty:post' %}">Post</a>

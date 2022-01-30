@@ -1,7 +1,17 @@
 asgiref==3.4.1
+autopep8==1.6.0
 backports.zoneinfo==0.2.1
+cssselect2==0.4.1
 Django==4.0.1
 django-environ==0.8.1
+easy-thumbnails==2.8.1
+lxml==4.7.1
 Pillow==9.0.0
+pycodestyle==2.8.0
+reportlab==3.6.6
 sqlparse==0.4.2
+svglib==1.2.1
+tinycss2==1.1.1
+toml==0.10.2
 tzdata==2021.5
+webencodings==0.5.1

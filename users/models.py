@@ -14,5 +14,3 @@ class Profile(models.Model):
     profile_photo = models.ImageField(upload_to='Users/%Y/%m/%d', blank=True)
 
     bio = models.CharField(max_length=350, blank=True)
-
-
