@@ -10,8 +10,12 @@ from .forms import PostCreateForm
 @login_required
 def home(request):
     """Home page of the application"""
-
-    return render(request, 'posty/base.html')
+    # display the posts of the user followed
+    posts = Post.objects.filter(user=request.user)
+    context = {
+        'posts': posts
+    }
+    return render(request, 'posty/base.html', context)
 
 
 @login_required
