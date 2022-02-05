@@ -24,11 +24,11 @@
     <link rel="stylesheet" href="{% static 'posty/css/base.css' %}">
 
 </head>
-<body class="container">
+<body class="container-fluid">
     {% include 'posty/navbar.html' %}
     <div class="container">
         <div class="row">
-            <div class="col-sm-6">
+            <!--<div class="col-sm-6">
                 {% for p in posts %}
                     <div class="card m-auto" style="width:20rem">
                         <img src="{{ p.post.url }}" alt="{{ p.user }} post" class="card-img-top">
@@ -41,8 +41,31 @@
                         <small>{{ p.created_at }}</small>
                     </div>
                 {% endfor %}
+            </div>-->
+            <div class="col-sm-8 col-xs-12">
+                <div class="col">
+                    {% for p in posts %}
+                    <div class="card shadow-sm">
+                        <!--<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Shanas</text></svg>-->
+                          <!--<img src="{% thumbnail p.post 1000x1000 %}" alt="" width="100%" height="500" class="bd-placeholder-img card-img-top" preserveAspectRatio="xMidYMid slice"/>-->
+                          <img src="{{ p.post.url }}" class="img-fluid" alt="...">
+                        <div class="card-body">
+                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                          <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                              <button type="button" class="btn btn-sm btn-outline-secondary">Like</button>
+                              <button type="button" class="btn btn-sm btn-outline-secondary">Comment</button>
+                            </div>
+                            <small class="text-muted">9 mins</small>
+                          </div>
+                        </div>
+                      </div>
+                    {% endfor %}
+                    
+                  </div>
             </div>
-            <div class="col-sm-6">
+           
+            <div class="col-sm-4 d-none">
                     <h1>Users</h1>
             </div>
         </div>
