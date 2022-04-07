@@ -1,2 +1,2 @@
 # Posty
-An Instagram Clone website made with Django web framework
+A social media website made with Django web framework
